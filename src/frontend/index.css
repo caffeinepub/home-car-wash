@@ -1,0 +1,179 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Bricolage Grotesque – Display / Headings ── */
+@font-face {
+  font-family: "Bricolage Grotesque";
+  font-style: normal;
+  font-weight: 300 800;
+  font-display: swap;
+  src: url("/assets/fonts/BricolageGrotesque-Variable.woff2") format("woff2");
+}
+
+/* ── Outfit – Body / UI ── */
+@font-face {
+  font-family: "Outfit";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("/assets/fonts/Outfit-Variable.woff2") format("woff2");
+}
+
+@layer base {
+  :root {
+    --radius: 0.75rem;
+
+    /* ── Aquatic-Industrial Palette ── */
+    /* Background: deep navy */
+    --background: 0.1 0.025 245;
+    /* Foreground: soft white */
+    --foreground: 0.97 0.005 210;
+
+    /* Card: slightly lighter navy with subtle blue tint */
+    --card: 0.14 0.03 245;
+    --card-foreground: 0.97 0.005 210;
+
+    /* Popover */
+    --popover: 0.16 0.035 245;
+    --popover-foreground: 0.97 0.005 210;
+
+    /* Primary: electric cyan-blue */
+    --primary: 0.65 0.2 205;
+    --primary-foreground: 0.08 0.02 245;
+
+    /* Secondary: muted navy */
+    --secondary: 0.2 0.04 245;
+    --secondary-foreground: 0.97 0.005 210;
+
+    /* Muted: dark navy */
+    --muted: 0.18 0.03 245;
+    --muted-foreground: 0.6 0.04 220;
+
+    /* Accent: bright cyan highlight */
+    --accent: 0.75 0.15 200;
+    --accent-foreground: 0.08 0.02 245;
+
+    /* Destructive: coral red */
+    --destructive: 0.6 0.22 25;
+    --destructive-foreground: 0.97 0 0;
+
+    /* Border: subtle navy edge */
+    --border: 0.25 0.05 245;
+    --input: 0.22 0.04 245;
+    --ring: 0.65 0.2 205;
+
+    /* Charts */
+    --chart-1: 0.65 0.2 205;
+    --chart-2: 0.72 0.18 165;
+    --chart-3: 0.55 0.18 285;
+    --chart-4: 0.8 0.14 85;
+    --chart-5: 0.6 0.22 25;
+
+    /* Sidebar */
+    --sidebar: 0.12 0.03 245;
+    --sidebar-foreground: 0.97 0.005 210;
+    --sidebar-primary: 0.65 0.2 205;
+    --sidebar-primary-foreground: 0.08 0.02 245;
+    --sidebar-accent: 0.18 0.04 245;
+    --sidebar-accent-foreground: 0.97 0.005 210;
+    --sidebar-border: 0.25 0.05 245;
+    --sidebar-ring: 0.65 0.2 205;
+
+    /* Custom tokens */
+    --wash-cyan: 0.78 0.18 200;
+    --wash-navy: 0.1 0.025 245;
+    --wash-card-glow: 0.65 0.2 205;
+    --wash-success: 0.72 0.17 155;
+    --wash-warning: 0.82 0.16 85;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Outfit", sans-serif;
+    font-feature-settings: "ss01", "ss02";
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "Bricolage Grotesque", sans-serif;
+  }
+}
+
+@layer utilities {
+  /* Glass card effect */
+  .glass-card {
+    background: oklch(var(--card) / 0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid oklch(var(--border) / 0.6);
+  }
+
+  /* Cyan glow effects */
+  .glow-cyan {
+    box-shadow: 0 0 24px oklch(var(--wash-cyan) / 0.25), 0 4px 16px rgba(0,0,0,0.4);
+  }
+
+  .glow-cyan-sm {
+    box-shadow: 0 0 12px oklch(var(--wash-cyan) / 0.2), 0 2px 8px rgba(0,0,0,0.3);
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    background: linear-gradient(135deg, oklch(var(--wash-cyan)) 0%, oklch(0.85 0.1 200) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Navigation gradient */
+  .nav-blur {
+    background: oklch(var(--wash-navy) / 0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid oklch(var(--border) / 0.4);
+  }
+
+  /* Animated gradient background */
+  .hero-bg {
+    background: 
+      radial-gradient(ellipse 80% 50% at 20% 40%, oklch(0.25 0.08 230 / 0.4) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 80% 60%, oklch(0.2 0.06 260 / 0.3) 0%, transparent 60%),
+      oklch(var(--wash-navy));
+  }
+
+  /* Badge variants */
+  .badge-pending {
+    background: oklch(var(--wash-warning) / 0.15);
+    color: oklch(var(--wash-warning));
+    border: 1px solid oklch(var(--wash-warning) / 0.3);
+  }
+
+  .badge-completed {
+    background: oklch(var(--wash-success) / 0.15);
+    color: oklch(var(--wash-success));
+    border: 1px solid oklch(var(--wash-success) / 0.3);
+  }
+
+  .badge-cancelled {
+    background: oklch(var(--destructive) / 0.15);
+    color: oklch(var(--destructive));
+    border: 1px solid oklch(var(--destructive) / 0.3);
+  }
+
+  /* Stat card gradient */
+  .stat-card-gradient {
+    background: linear-gradient(135deg, oklch(var(--card)) 0%, oklch(0.18 0.04 235) 100%);
+  }
+
+  /* Diagonal divider */
+  .diagonal-section {
+    clip-path: polygon(0 5%, 100% 0%, 100% 95%, 0% 100%);
+  }
+}
